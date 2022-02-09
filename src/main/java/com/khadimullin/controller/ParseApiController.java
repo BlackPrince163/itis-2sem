@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @RestController
-public class HelloController {
+public class ParseApiController {
     private final Service service = new Service();
 
     @GetMapping("/kazan")

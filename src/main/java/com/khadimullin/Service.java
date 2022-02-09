@@ -1,7 +1,5 @@
 package com.khadimullin;
 
-import com.khadimullin.helper.Json;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,7 +9,6 @@ import java.net.URL;
 public class Service {
     private final static String API_KEY = "47f8e32ff6b6e632ade1c688d83b2b94";
     private final static String BASE_URL = "https://api.openweathermap.org/data/2.5/weather?q=";
-    private final static Json jsonHelper = new Json();
 
     public static String get(String city) throws IOException {
         URL myUrl = new URL(BASE_URL + city + "&appid=" + API_KEY);
