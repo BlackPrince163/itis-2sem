@@ -14,9 +14,9 @@ public class HistoryWeather {
 
     private String date;
 
-    private Float temp;
+    private String temp;
 
-    private Float feels_like;
+    private String feels_like;
 
     private String email;
 
@@ -36,24 +36,24 @@ public class HistoryWeather {
         this.date = date;
     }
 
-    public Float getTemp() {
+    public Integer getId() {
+        return id;
+    }
+
+    public String getTemp() {
         return temp;
     }
 
-    public void setTemp(Float temp) {
+    public void setTemp(String temp) {
         this.temp = temp;
     }
 
-    public Float getFeels_like() {
+    public String getFeels_like() {
         return feels_like;
     }
 
-    public void setFeels_like(Float feels_like) {
+    public void setFeels_like(String feels_like) {
         this.feels_like = feels_like;
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     public void setId(Integer id) {
@@ -68,11 +68,11 @@ public class HistoryWeather {
         this.email = email;
     }
 
-    public HistoryWeather(String city, String date, Float temp, Float feels_like, String email) {
+    public HistoryWeather(String email, String city, String temp, String feels_like) {
+        this.email = email;
         this.city = city;
-        this.date = date;
         this.temp = temp;
         this.feels_like = feels_like;
-        this.email = email;
     }
 }
+

@@ -10,13 +10,13 @@ public class HistoryDto {
 
     private String date;
 
-    private Float temp;
+    private String temp;
 
-    private Float feels_like;
+    private String feels_like;
 
     private String email;
 
-    public HistoryDto(String city, String date, Float temp, Float feels_like, String email) {
+    public HistoryDto(String city, String date, String temp, String feels_like, String email) {
         this.city = city;
         this.date = date;
         this.temp = temp;
@@ -40,19 +40,19 @@ public class HistoryDto {
         this.date = date;
     }
 
-    public Float getTemp() {
+    public String getTemp() {
         return temp;
     }
 
-    public void setTemp(Float temp) {
+    public void setTemp(String temp) {
         this.temp = temp;
     }
 
-    public Float getFeels_like() {
+    public String getFeels_like() {
         return feels_like;
     }
 
-    public void setFeels_like(Float feels_like) {
+    public void setFeels_like(String feels_like) {
         this.feels_like = feels_like;
     }
 
