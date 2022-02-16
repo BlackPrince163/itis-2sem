@@ -17,8 +17,9 @@ import java.util.Optional;
 
 public class WeatherController {
     private Json json;
+
     @PostMapping("/history")
-    public HistoryDto createWeather(@Valid @RequestBody CreateHistoryDto form){
+    public HistoryDto createWeather(@Valid @RequestBody CreateHistoryDto form) {
         Map<String, String> jsonMap;
         try {
             jsonMap = json.parseJson(HistoryHelper.getWeather(form.getCity()));
@@ -30,13 +31,11 @@ public class WeatherController {
                 jsonMap.get("felas_like"));
 
 
-
-
-        return forecastDTO.orElse(null);
+        return HistoryDto(null);
     }
 
     @GetMapping("/history")
-    public List<HistoryDto> getWeather(){
+    public List<HistoryDto> getWeather() {
         return HistoryDto.fromModel();
     }
 }
