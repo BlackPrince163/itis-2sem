@@ -31,7 +31,7 @@ public class WeatherController {
                 jsonMap.get("felas_like"));
 
 
-        return HistoryDto(null);
+        return HistoryDto();
     }
 
     @GetMapping("/history")
