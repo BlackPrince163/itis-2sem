@@ -65,7 +65,7 @@ public class HistoryDto {
     }
 
     public static HistoryDto fromModel(HistoryWeather historyWeather) {
-        return new HistoryDto(historyWeather.getCity(), historyWeather.getDate(), historyWeather.getTemp()
-                historyWeather.getFeels_like(), historyWeather.getEmail(), );
+        return new HistoryDto(historyWeather.getCity(), historyWeather.getDate(), historyWeather.getTemp(),
+                historyWeather.getFeels_like(), historyWeather.getEmail());
     }
 }
