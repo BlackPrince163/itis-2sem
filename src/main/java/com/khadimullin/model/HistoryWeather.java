@@ -20,6 +20,9 @@ public class HistoryWeather {
 
     private String email;
 
+    @OneToOne(mappedBy = "historyWeather")
+    private Appeal appeal;
+
     public String getCity() {
         return city;
     }

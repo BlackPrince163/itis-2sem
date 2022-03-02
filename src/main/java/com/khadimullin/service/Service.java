@@ -1,4 +1,4 @@
-package com.khadimullin;
+package com.khadimullin.service;
 
 import java.io.BufferedReader;
 import java.io.IOException;

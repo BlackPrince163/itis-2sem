@@ -4,6 +4,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -17,6 +18,9 @@ public class User {
     private String email;
 
     private String hashPassword;
+
+    @OneToMany(mappedBy = "group", fetch = FetchType.EAGER)
+    private List<Appeal> appeals;
 
     public User() {}
 
