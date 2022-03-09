@@ -11,7 +11,10 @@ public class CreateUserDto {
     private String email;
 
     @NotBlank(message = "Password shouldn't be blank!")
-    private String hashPassword;
+    private String password;
+
+    public CreateUserDto() {
+    }
 
     public String getName() {
         return name;
@@ -29,17 +32,17 @@ public class CreateUserDto {
         this.email = email;
     }
 
-    public String getHashPassword() {
-        return hashPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setHashPassword(String password) {
-        this.hashPassword = password;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public CreateUserDto(String name, String email, String password) {
+    public CreateUserDto(String name, String email) {
         this.name = name;
         this.email = email;
-        this.hashPassword = password;
     }
+
 }

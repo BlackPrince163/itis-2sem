@@ -32,6 +32,6 @@ public class UserController {
 
     @PostMapping("/user")
     public UserDto createUser(@Valid @RequestBody CreateUserDto user) {
-        return UserDto.fromModel(userRepository.save(new User(user.getName(), user.getEmail(), user.getHashPassword())));
+        return UserDto.fromModel(userRepository.save(new User(user.getName(), user.getEmail(), user.getPassword())));
     }
 }

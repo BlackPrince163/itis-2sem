@@ -4,6 +4,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -22,7 +23,11 @@ public class User {
     @OneToMany(mappedBy = "group", fetch = FetchType.EAGER)
     private List<Appeal> appeals;
 
-    public User() {}
+    @Size(min = 8, max = 64, message = "Password should contains from 8 to 64 symbols")
+    @Column(nullable = false, length = 64)
+    private String password;
+
+    public User(String name, String email) {}
 
 
     public void setId(Integer id) {
@@ -51,6 +56,14 @@ public class User {
 
     public String getHashPassword() {
         return hashPassword;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String hashPassword(String password) {
