@@ -4,34 +4,56 @@ import com.khadimullin.dto.CreateUserDto;
 import com.khadimullin.dto.UserDto;
 import com.khadimullin.model.User;
 import com.khadimullin.repository.UserRepository;
+import com.khadimullin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.stream.Collectors;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
-@RestController
+@Controller
 public class UserController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @Autowired
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/user")
-    public Iterable<UserDto> getAll() {
-        return userRepository.findAll().stream().map(UserDto::fromModel).collect(Collectors.toList());
+    @ResponseBody
+    public Iterable<UserDto> getAll(@RequestParam(value = "name", required = false) Optional<String> name) {
+        return name.isEmpty() ? userService.getAll() : userService.getAllByName(name.get());
     }
 
     @GetMapping("/user/{id}")
+    @ResponseBody
     public UserDto get(@PathVariable Integer id) {
-        return userRepository.findById(id).stream().map(UserDto::fromModel).findFirst().orElse(null);
+        return userService.getById(id);
     }
 
-    @PostMapping("/user")
-    public UserDto createUser(@Valid @RequestBody CreateUserDto user) {
-        return UserDto.fromModel(userRepository.save(new User(user.getName(), user.getEmail(), user.getPassword())));
+    @GetMapping("/user/stepan")
+    @ResponseBody
+    public Iterable<UserDto> getAllStepan() {
+        return userService.getAllStepan();
+    }
+
+    @PostMapping("/sign_up")
+    public String signUp(@ModelAttribute(name = "user") CreateUserDto userDto, HttpServletRequest request) {
+        String url = request.getRequestURL().toString().replace(request.getServletPath(), "");
+        userService.signUp(userDto, url);
+        return "sign_up_success";
+    }
+
+    @GetMapping("/verify")
+    public String verify(@Param("code") String code) {
+        if (userService.verify(code)) {
+            return "verification_success";
+        } else {
+            return "verification_failed";
+        }
     }
 }

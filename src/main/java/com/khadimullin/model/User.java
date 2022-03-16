@@ -27,12 +27,34 @@ public class User {
     @Column(nullable = false, length = 64)
     private String password;
 
+    private boolean enabled;
+
+    @Column(length = 64)
+    private String verificationCode;
+
     public User(String name, String email) {}
 
 
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
+    }
+
 
     public Integer getId() {
         return id;
@@ -60,6 +82,13 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public User(String name, String email, String verificationCode, String password) {
+        this.name = name;
+        this.email = email;
+        this.verificationCode = verificationCode;
+        this.password = password;
     }
 
     public void setPassword(String password) {
