@@ -8,9 +8,11 @@ import com.khadimullin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -41,11 +43,12 @@ public class UserController {
         return userService.getAllStepan();
     }
 
-    @PostMapping("/sign_up")
-    public String signUp(@ModelAttribute(name = "user") CreateUserDto userDto, HttpServletRequest request) {
+    @PostMapping("/signUp")
+    public String createUser(@Valid @ModelAttribute(name = "user") CreateUserDTO form, Model model, HttpServletRequest request){
         String url = request.getRequestURL().toString().replace(request.getServletPath(), "");
-        userService.signUp(userDto, url);
-        return "sign_up_success";
+        Optional<UserDto> userDTO = userService.saveUser(form, url);
+        model.addAttribute("user", userDTO);
+        return "signUpSuccess";
     }
 
     @GetMapping("/verify")

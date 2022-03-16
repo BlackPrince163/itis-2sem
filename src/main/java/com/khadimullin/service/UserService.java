@@ -4,6 +4,7 @@ import com.khadimullin.dto.CreateUserDto;
 import com.khadimullin.dto.UserDto;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     UserDto getByEmail(String email);
@@ -23,4 +24,6 @@ public interface UserService {
     boolean verify(String verificationCode);
 
     void sendVerificationMail(String mail, String name, String code, String url);
+
+    Optional<UserDto> saveUser(UserDto form, String url);
 }
