@@ -44,7 +44,7 @@ public class UserController {
     }
 
     @PostMapping("/signUp")
-    public String createUser(@Valid @ModelAttribute(name = "user") CreateUserDTO form, Model model, HttpServletRequest request){
+    public String createUser(@Valid @ModelAttribute(name = "user") CreateUserDto form, Model model, HttpServletRequest request){
         String url = request.getRequestURL().toString().replace(request.getServletPath(), "");
         Optional<UserDto> userDTO = userService.saveUser(form, url);
         model.addAttribute("user", userDTO);
