@@ -34,6 +34,10 @@ public class User {
 
     public User(String name, String email) {}
 
+    public User() {
+
+    }
+
 
     public void setId(Integer id) {
         this.id = id;

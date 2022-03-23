@@ -33,9 +33,15 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     @ResponseBody
-    public UserDto get(@PathVariable Integer id) {
+    public UserDto getUser(@PathVariable Integer id) {
         return userService.getById(id);
     }
+
+//    @PostMapping("/user")
+//    @ResponseBody
+//    public UserDto createUser(@Valid @RequestBody CreateUserDto user) {
+//        return userService.signUp(user);
+//    }
 
     @GetMapping("/user/stepan")
     @ResponseBody
@@ -43,12 +49,11 @@ public class UserController {
         return userService.getAllStepan();
     }
 
-    @PostMapping("/signUp")
-    public String createUser(@Valid @ModelAttribute(name = "user") CreateUserDto form, Model model, HttpServletRequest request){
+    @PostMapping("/sign_up")
+    public String signUp(@ModelAttribute(name = "user") CreateUserDto userDto, HttpServletRequest request) {
         String url = request.getRequestURL().toString().replace(request.getServletPath(), "");
-        Optional<UserDto> userDTO = userService.saveUser(form, url);
-        model.addAttribute("user", userDTO);
-        return "signUpSuccess";
+        userService.signUp(userDto, url);
+        return "sign_up_success";
     }
 
     @GetMapping("/verify")
