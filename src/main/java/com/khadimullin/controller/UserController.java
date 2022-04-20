@@ -5,6 +5,10 @@ import com.khadimullin.dto.UserDto;
 import com.khadimullin.model.User;
 import com.khadimullin.repository.UserRepository;
 import com.khadimullin.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -19,6 +23,7 @@ import java.util.Optional;
 public class UserController {
 
     private final UserService userService;
+
 
     @Autowired
     public UserController(UserService userService) {
@@ -49,6 +54,15 @@ public class UserController {
         return userService.getAllStepan();
     }
 
+    @Operation(summary = "Create user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User was created",
+                    content = {
+                            @Content(mediaType = "text/html"
+                            )
+                    }
+            )
+    })
     @PostMapping("/sign_up")
     public String signUp(@ModelAttribute(name = "user") CreateUserDto userDto, HttpServletRequest request) {
         String url = request.getRequestURL().toString().replace(request.getServletPath(), "");
@@ -56,6 +70,15 @@ public class UserController {
         return "sign_up_success";
     }
 
+    @Operation(summary = "Verify user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User was verified",
+                    content = {
+                            @Content(mediaType = "text/html"
+                            )
+                    }
+            )
+    })
     @GetMapping("/verify")
     public String verify(@Param("code") String code) {
         if (userService.verify(code)) {

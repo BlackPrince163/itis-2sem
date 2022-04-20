@@ -7,6 +7,11 @@ import com.khadimullin.repository.AppealRepository;
 import com.khadimullin.repository.HistoryRepository;
 import com.khadimullin.repository.UserRepository;
 import com.khadimullin.service.Service;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,6 +37,14 @@ public class WeatherController {
         this.appealRepository = appealRepository;
     }
 
+    @Operation(summary = "Add weather")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Weather added",
+                    content = {
+                            @Content(mediaType = "application/json")
+                    }
+            )
+    })
     @GetMapping("/weather")
     public HistoryWeather addWeather(@Valid @RequestParam Optional<String> city, @RequestParam int user_id) throws IOException {
         Map<String, String> result = weatherService.get(city.orElse("Kazan"));

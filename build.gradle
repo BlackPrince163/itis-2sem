@@ -31,6 +31,7 @@ dependencies {
     implementation 'org.liquibase:liquibase-core:4.9.0'
     implementation 'org.projectlombok:lombok:1.18.20'
     implementation 'org.projectlombok:lombok:1.18.20'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.7'
     liquibaseRuntime('org.liquibase:liquibase-core:4.9.0')
     liquibaseRuntime('org.postgresql:postgresql:42.3.3')
 
